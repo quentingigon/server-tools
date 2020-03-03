@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2016 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -46,7 +45,7 @@ class DateRangeType(models.Model):
                     raise ValidationError(
                         _('You cannot change the company, as this '
                           'Date Range Type is  assigned to Date Range '
-                          '(%s).') % (rec.date_range_ids.name_get()[0][1]))
+                          f'({rec.date_range_ids.name_get()[0][1]}).'))
 
     @api.constrains('parent_type_id')
     def _validate_parent_type_id(self):

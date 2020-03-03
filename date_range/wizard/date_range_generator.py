@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2016 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -45,19 +44,19 @@ class DateRangeGenerator(models.TransientModel):
     def _compute_date_ranges(self):
         self.ensure_one()
         vals = rrule(freq=self.unit_of_time, interval=self.duration_count,
-                     dtstart=fields.Date.from_string(self.date_start),
+                     dtstart=self.date_start,
                      count=self.count+1)
         vals = list(vals)
         date_ranges = []
-        count_digits = len(unicode(self.count))
+        count_digits = len(str(self.count))
         for idx, dt_start in enumerate(vals[:-1]):
-            date_start = fields.Date.to_string(dt_start.date())
+            date_start = dt_start.date()
             # always remove 1 day for the date_end since range limits are
             # inclusive
             dt_end = vals[idx+1].date() - relativedelta(days=1)
-            date_end = fields.Date.to_string(dt_end)
+            date_end = dt_end
             date_ranges.append({
-                'name': '%s%0*d' % (
+                'name': f'%s%0*d' % (
                     self.name_prefix, count_digits, idx + 1),
                 'date_start': date_start,
                 'date_end': date_end,

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2016 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -24,7 +23,7 @@ class DateRange(models.Model):
         ondelete='restrict', domain="['|', ('company_id', '=', company_id), "
                                     "('company_id', '=', False)]")
     type_name = fields.Char(
-        string='Type', related='type_id.name', readonly=True, store=True)
+        string='Type', related='type_id.name', store=True)
     company_id = fields.Many2one(
         comodel_name='res.company', string='Company', index=1,
         default=_default_company)
@@ -33,8 +32,7 @@ class DateRange(models.Model):
         "removing it.", default=True)
     parent_type_id = fields.Many2one(
         related='type_id.parent_type_id',
-        store=True,
-        readonly=True)
+        store=True)
     parent_id = fields.Many2one(
         comodel_name='date.range', string="Parent", index=1)
 
@@ -101,12 +99,12 @@ class DateRange(models.Model):
     @api.constrains('type_id', 'date_start', 'date_end', 'company_id')
     def _validate_range(self):
         for this in self:
-            start = fields.Date.from_string(this.date_start)
-            end = fields.Date.from_string(this.date_end)
+            start = this.date_start
+            end = this.date_end
             if start > end:
                 raise ValidationError(
-                    _("%s is not a valid range (%s > %s)") % (
-                        this.name, this.date_start, this.date_end))
+                    _(f"{this.name} is not a valid range "
+                      f"({this.date_start} > {this.date_end})"))
             if this.type_id.allow_overlap:
                 continue
             # here we use a plain SQL query to benefit of the daterange
@@ -133,7 +131,7 @@ class DateRange(models.Model):
             if res:
                 dt = self.browse(res[0][0])
                 raise ValidationError(
-                    _("%s overlaps %s") % (this.name, dt.name))
+                    _(f"{this.name} overlaps {dt.name}"))
 
     @api.multi
     def get_domain(self, field_name):

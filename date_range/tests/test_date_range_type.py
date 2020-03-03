@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2016 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
@@ -11,7 +10,7 @@ from odoo.exceptions import ValidationError
 class DateRangeTypeTest(TransactionCase):
 
     def setUp(self):
-        super(DateRangeTypeTest, self).setUp()
+        super().setUp()
         self.type = self.env['date.range.type']
         self.company = self.env['res.company'].create({
             'name': 'Test company',

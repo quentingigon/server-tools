@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2016 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
@@ -9,7 +8,7 @@ from odoo.exceptions import ValidationError
 class DateRangeTest(TransactionCase):
 
     def setUp(self):
-        super(DateRangeTest, self).setUp()
+        super().setUp()
         self.date_range = self.env['date.range']
         self.type = self.env['date.range.type'].create(
             {'name': 'Fiscal year',
@@ -91,7 +90,7 @@ class DateRangeTest(TransactionCase):
             'date_end': '2016-12-31',
             'type_id': self.type.id,
         })
-        self.assertEquals(dr.name, 'FS2016')
+        self.assertEqual(dr.name, 'FS2016')
 
     def test_domain(self):
         dr = self.date_range.create({
@@ -102,7 +101,7 @@ class DateRangeTest(TransactionCase):
         })
         domain = dr.get_domain('my_field')
         # By default the domain include limits
-        self.assertEquals(
+        self.assertEqual(
             domain,
             [('my_field', '>=', '2015-01-01'),
              ('my_field', '<=', '2015-12-31')])
