@@ -19,19 +19,9 @@ msgid "Company Country Configuration Settings"
 msgstr ""
 
 #. module: company_country
-#: code:addons/company_country/models/res_config.py:34
+#: code:addons/company_country/models/res_config.py:47
 #, python-format
 msgid "Country code %s not found. Use ISO 3166 codes 2 letters"
-msgstr ""
-
-#. module: company_country
-#: model:ir.model.fields,field_description:company_country.field_company_country_config_settings__create_uid
-msgid "Created by"
-msgstr ""
-
-#. module: company_country
-#: model:ir.model.fields,field_description:company_country.field_company_country_config_settings__create_date
-msgid "Created on"
 msgstr ""
 
 #. module: company_country
@@ -40,7 +30,7 @@ msgid "Display Name"
 msgstr ""
 
 #. module: company_country
-#: code:addons/company_country/models/res_config.py:26
+#: code:addons/company_country/models/res_config.py:39
 #, python-format
 msgid "Error COUNTRY environment variable with country code not defined and no localization found in pool."
 msgstr ""
@@ -53,15 +43,5 @@ msgstr ""
 #. module: company_country
 #: model:ir.model.fields,field_description:company_country.field_company_country_config_settings____last_update
 msgid "Last Modified on"
-msgstr ""
-
-#. module: company_country
-#: model:ir.model.fields,field_description:company_country.field_company_country_config_settings__write_uid
-msgid "Last Updated by"
-msgstr ""
-
-#. module: company_country
-#: model:ir.model.fields,field_description:company_country.field_company_country_config_settings__write_date
-msgid "Last Updated on"
 msgstr ""
 
